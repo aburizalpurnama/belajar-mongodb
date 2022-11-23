@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  mongo:
+    container_name: mongo
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    command: mongod
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: rizal
+      MONGO_INITDB_ROOT_PASSWORD: secret
+      MONGO_INITDB_DATABASE: admin
+    volumes:
+      - "mongo-golang-volume:/data/db"
+    networks:
+      - mongo-golang-network
+
+
+volumes:
+  mongo-golang-volume:
+    name: mongo-golang-volume
+
+networks:
+  mongo-golang-network:
+    driver: bridge
+    name: mongo-golang-network
